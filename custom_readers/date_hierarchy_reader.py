@@ -13,6 +13,7 @@ class DateHierarchyReader(BaseReader):
         if self.isFirstLine:
             # tossing header away
             self.file_pointer.readline()
+            self.isFirstLine = False
         line = self.file_pointer.readline()
         if not line:
             return None
