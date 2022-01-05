@@ -27,10 +27,10 @@ def copy_from_csv(mode: str, target_root_directory: str, reader: base_reader.Bas
                     )
 
                 mkdir_command = f"mkdir -p {target_folder}"
-                if mode == "server":
+                if mode == "remote":
                     connection.run(mkdir_command)
                     connection.run(
-                        f"cp '{ROOTPATH}/{subdirectory}/*' '{target_folder}'"
+                        f"cp {ROOTPATH}/{subdirectory}* '{target_folder}'"
                     )
                 elif mode == "local":
                     subprocess.run(str.split(mkdir_command, " "), check=True)
