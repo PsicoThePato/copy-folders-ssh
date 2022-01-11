@@ -20,6 +20,7 @@ Call python (or python3) with the following flags:
 For the script to work, you need to give a Reader that inherite from `BaseReader` and implement a `readline` method. Each return of `readline()` should give the relative (to the `ROOTPATH` var) path of the desired folder. The folder and it's contents will be copied to the path provided with the --path flag, as well as it's parent directories up to the `ROOTPATH`.
 
 # TODO
+- [x] Allow paths without backslash on the end of it (it will be added by the program).
 - [ ] Allow paths with blank spaces
 - [ ] Validate given paths to not allow improper path representation
 - [ ] Allow passless ssh
