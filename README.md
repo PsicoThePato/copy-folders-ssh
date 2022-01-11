@@ -21,6 +21,7 @@ For the script to work, you need to give a Reader that inherite from `BaseReader
 
 # TODO
 - [x] Allow paths without backslash on the end of it (it will be added by the program).
+- [ ] Add a dry run flag
 - [ ] Allow paths with blank spaces
 - [ ] Validate given paths to not allow improper path representation
 - [ ] Allow passless ssh
