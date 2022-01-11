@@ -20,10 +20,13 @@ def copy_from_csv(mode: str, target_root_directory: str, reader: base_reader.Bas
             },
         ) as connection:
             while subdirectory := reader.readline():
+                # adding backslash in case user forgot
+                if subdirectory[-1] != '/':
+                    subdirectory = subdirectory + '/'
                 target_folder = target_root_directory + subdirectory
                 if " " in target_folder:
                     raise ValueError(
-                        "Blank spaces are not permitted on target_folder"
+                        "Blank spaces are not permitted on paths"
                     )
 
                 mkdir_command = f"mkdir -p {target_folder}"
@@ -40,7 +43,7 @@ def copy_from_csv(mode: str, target_root_directory: str, reader: base_reader.Bas
                             "-p",
                             CONNECTION_PARAMS.passwd,
                             "scp",
-                            f"{CONNECTION_PARAMS.usr}@{CONNECTION_PARAMS.host}:{ROOTPATH}/{subdirectory}/*",
+                            f"{CONNECTION_PARAMS.usr}@{CONNECTION_PARAMS.host}:{ROOTPATH}/{subdirectory}*",
                             target_folder,
                         ],
                         check=True,
@@ -59,12 +62,14 @@ if __name__ == "__main__":
     parser.add_argument(
         "--path",
         action="store",
-        dest="target_root_path",
+        dest="target_root_directory",
         required=True,
         help="Root folder to copy files/folders",
     )
     args = parser.parse_args()
-    print(args.mode, args.target_root_path)
+    print(args.mode, args.target_root_directory)
+    if args.target_root_directory[-1] != '/':
+        args.target_root_directory = args.target_root_directory + '/'
 
     reader = date_hierarchy_reader.DateHierarchyReader(FILENAMESPATH)
-    copy_from_csv(args.mode, args.target_root_path, reader)
+    copy_from_csv(args.mode, args.target_root_directory, reader)
