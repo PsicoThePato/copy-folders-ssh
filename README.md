@@ -4,7 +4,7 @@ Simple script to copy folders via ssh with their paths given in a file.
 # Usage
 ## Create a .env file inside the config folder with the following variables:
 
-- `FILESNAMEPATH`: Path to a file to be read with your custom reader (more about this later) and which specifies which folders you want to copy
+- `FILENAMESPATH`: Path to a file to be read with your custom reader (more about this later) and which specifies which folders you want to copy
 - `ROOTPATH`: Context path on server. Your file should give paths relative to this.
 - `HOST`: Host on which the desired folders are
 - `USR`: User to ssh to host
